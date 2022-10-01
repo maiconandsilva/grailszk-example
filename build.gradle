@@ -25,8 +25,8 @@ apply plugin:"org.grails.grails-gsp"
 apply plugin:"io.github.zkgroovy.grailszk-gradle-plugin"
 
 repositories {
-    mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
+    mavenCentral()
 }
 
 configurations {
@@ -40,6 +40,19 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     
     compile "io.github.zkgroovy:grailszk:$grailszkVersion"
+    implementation "org.zkoss.zk:zk:$zkVersion", {
+        exclude group: "org.zkoss.zk", module: "zkplus"
+    }
+    implementation "org.zkoss.zk:zul:$zkVersion"
+    implementation "org.zkoss.zk:zhtml:$zkVersion"
+    implementation "org.zkoss.zk:zkbind:$zkVersion"
+    implementation "org.zkoss.common:zel:$zkVersion"
+    implementation "org.zkoss.common:zcommon:$zkVersion"
+    implementation ("org.zkoss.common:zweb:$zkVersion") {
+        transitive = true
+        exclude module: "ResourceCaches"
+    }
+    implementation "org.zkoss.zk:zkplus:7.0.1"
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
@@ -81,6 +94,10 @@ dependencies {
     testCompile "org.seleniumhq.selenium:selenium-support:3.14.0"
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
+}
+
+configurations.all {
+    exclude group: "org.slf4j", module: "slf4j-jdk14"
 }
 
 bootRun {
