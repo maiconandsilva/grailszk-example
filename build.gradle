@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
@@ -12,9 +13,6 @@ buildscript {
     }
 }
 
-version "0.1"
-group "file.upload"
-
 apply plugin:"eclipse"
 apply plugin:"idea"
 apply plugin:"war"
@@ -25,6 +23,7 @@ apply plugin:"org.grails.grails-gsp"
 apply plugin:"io.github.zkgroovy.grailszk-gradle-plugin"
 
 repositories {
+    mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
     mavenCentral()
 }
@@ -40,19 +39,21 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     
     compile "io.github.zkgroovy:grailszk:$grailszkVersion"
-    implementation "org.zkoss.zk:zk:$zkVersion", {
+    compile "org.zkoss.zk:zk:$zkVersion", {
+        transitive = true
         exclude group: "org.zkoss.zk", module: "zkplus"
+        exclude module: "META-INF/web-fragment.xml"
     }
-    implementation "org.zkoss.zk:zul:$zkVersion"
-    implementation "org.zkoss.zk:zhtml:$zkVersion"
-    implementation "org.zkoss.zk:zkbind:$zkVersion"
-    implementation "org.zkoss.common:zel:$zkVersion"
-    implementation "org.zkoss.common:zcommon:$zkVersion"
-    implementation ("org.zkoss.common:zweb:$zkVersion") {
+    compile "org.zkoss.zk:zul:$zkVersion"
+    compile "org.zkoss.zk:zhtml:$zkVersion"
+    compile "org.zkoss.zk:zkbind:$zkVersion"
+    compile "org.zkoss.common:zel:$zkVersion"
+    compile "org.zkoss.common:zcommon:$zkVersion"
+    compile ("org.zkoss.common:zweb:$zkVersion") {
         transitive = true
         exclude module: "ResourceCaches"
     }
-    implementation "org.zkoss.zk:zkplus:7.0.1"
+    compile "org.zkoss.zk:zkplus:7.0.1"
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
@@ -97,6 +98,7 @@ dependencies {
 }
 
 configurations.all {
+    exclude group: "org.zkoss.zk", module: "zkwebfragment"
     exclude group: "org.slf4j", module: "slf4j-jdk14"
 }
 
