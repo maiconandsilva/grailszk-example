@@ -70,6 +70,10 @@ grails:
             xml:
               - text/xml
               - application/xml
+            zhtml:
+              - text/html
+            zul:
+              - text/html
     urlmapping:
         cache:
             maxsize: 1000
