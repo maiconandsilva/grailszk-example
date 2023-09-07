@@ -25,7 +25,10 @@ apply plugin:"org.grails.grails-gsp"
 apply plugin:"io.github.zkgroovy.grailszk-gradle-plugin"
 
 repositories {
+    mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://mavensync.zkoss.org/maven2" }
+//    maven { url "https://mavensync.zkoss.org/eval" }
     mavenCentral()
 }
 
@@ -38,8 +41,11 @@ configurations {
 
 dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    
-    compile "io.github.zkgroovy:grailszk:$grailszkVersion"
+
+    implementation "io.github.zkgroovy:grailszk:$grailszkVersion"
+//    implementation "org.zkoss.zkspringboot:zkspringboot-starter:${zkspringbootVersion}", {
+//        exclude group: 'org.zkoss.zk', module: 'zkbind'
+//    }
     implementation "org.zkoss.zk:zk:$zkVersion", {
         exclude group: "org.zkoss.zk", module: "zkplus"
     }

@@ -1,5 +1,5 @@
 package file.upload
 
 class TestController {
-    def index() { render params }
+    def index() { render view: "B101_1" }
 }

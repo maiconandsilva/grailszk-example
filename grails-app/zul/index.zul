@@ -3,21 +3,31 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page zscriptLanguage="GroovyGrails"?>
 
+<?component name="loc-datebox" extends="datebox" locale="${somelocale}"?>
+
+
 <zk xmlns="http://www.zkoss.org/2005/zul"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 <window apply="IndexComposer">
-
     <hbox>
         <image src="/static/images/ZK-Logo.gif"/>
     </hbox>
-    
+
     <vbox id="scaffoldingBox"/>
     <vbox>
         <fileupload id="uploader" label="Upload" upload="true"/>
         <image id="img"/>
+        <listbox>
+            <listitem forEach="Apple, Orange, Strawberry">
+                <custom-attributes field="${each}"/>
+                <listcell label="${field}"/>
+            </listitem>
+        </listbox>
+        <button label="${each}" forEach="apple, orange"/>
+
     </vbox>
 
 </window>

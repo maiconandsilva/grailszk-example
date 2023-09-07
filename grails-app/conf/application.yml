@@ -26,6 +26,8 @@ spring:
     devtools:
         restart:
             additional-exclude:
+                - '*.zul'
+                - '**/*.zul'
                 - '*.gsp'
                 - '**/*.gsp'
                 - '*.gson'
